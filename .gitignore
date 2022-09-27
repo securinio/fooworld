@@ -3,7 +3,7 @@ target/
 !.mvn/wrapper/maven-wrapper.jar
 !**/src/main/**/target/
 !**/src/test/**/target/
-!.github/workflows/ShiftLeft.yaml
+.github/workflows/ShiftLeft.yaml
 
 ### IntelliJ IDEA ###
 .idea
