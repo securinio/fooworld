@@ -46,6 +46,12 @@ int array[];
                         , WebMvcLinkBuilder.linkTo(WebMvcLinkBuilder.methodOn(InventoryResource.class).getInventoryByProductId(productId)).withSelfRel()
                         , WebMvcLinkBuilder.linkTo(WebMvcLinkBuilder.methodOn(InventoryResource.class).getAllInventory()).withRel("inventory"));
     }
+    
+    
+    
+    
+    
+    
 
     @GetMapping
     @ResponseStatus(HttpStatus.OK)
@@ -74,6 +80,9 @@ int array[];
         inventoryService.removeInventory(inventoryId);
     }
 
+    
+    
+    
     @DeleteMapping("/products/{productId}")
     @ResponseStatus(HttpStatus.OK)
     public void removeInventoryByProductId(@PathVariable("productId") Long productId) {
