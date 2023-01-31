@@ -67,6 +67,8 @@ int array[];
 
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
+    
+    
     public EntityModel<Inventory> createInventory(@Valid @RequestBody Inventory inventory) {
         return EntityModel
                 .of(inventoryService.createInventory(inventory)
