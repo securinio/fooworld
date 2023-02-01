@@ -75,13 +75,6 @@ int array[];
                         , WebMvcLinkBuilder.linkTo(WebMvcLinkBuilder.methodOn(InventoryResource.class).getInventoryById(inventory.getId())).withSelfRel()
                         , WebMvcLinkBuilder.linkTo(WebMvcLinkBuilder.methodOn(InventoryResource.class).getAllInventory()).withRel("inventory"));
     }
-    
-    public EntityModel<Inventory> createInventory(@Valid @RequestBody Inventory inventory) {
-        return EntityModel
-                .of(inventoryService.createInventory(inventory)
-                        , WebMvcLinkBuilder.linkTo(WebMvcLinkBuilder.methodOn(InventoryResource.class).getInventoryById(inventory.getId())).withSelfRel()
-                        , WebMvcLinkBuilder.linkTo(WebMvcLinkBuilder.methodOn(InventoryResource.class).getAllInventory()).withRel("inventory"));
-    }
 
     @DeleteMapping("/{inventoryId}")
     @ResponseStatus(HttpStatus.OK)
