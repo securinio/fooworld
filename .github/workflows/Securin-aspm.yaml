@@ -11,16 +11,16 @@ on:
 jobs:
   scanning:
     env:
-      APP_ID: 5da10305c24d09c230e105219aa552851a78a230d0adc78a22da66b45322ccbc
+      APP_ID: b2c7ecc33338e22a5f7b3331aa6551f4df51afa1792794f4f4ca3d7d287a9ec9
       BRANCH_NAME: main
-      SCAN_ID: 122a5d67923227c5369d07f00b2419ae590c90e06c2537f7fd8d67f06df25001
-      REQ_URL_MAP: "${{toJSON('{\"SL_RESULT_API_HOST\":\"https://slresultapi.uat.securin.io/resultapi\"\
-        ,\"SL_RESULTPARSER_API_HOST\":\"https://slresultparserapi.uat.securin.io/resultparserapi\"\
+      SCAN_ID: e25e80d1e03b554d64eb706353d385e0a185fc4eb18246dff49040b05e3bfe76
+      REQ_URL_MAP: "${{toJSON('{\"SL_RESULT_API_HOST\":\"https://slresultapi.securin.io/resultapi\"\
+        ,\"SL_RESULTPARSER_API_HOST\":\"https://slresultparserapi.securin.io/resultparserapi\"\
         }')}}"
     steps:
     - name: Retrieve Token Info
       id: auth_token
-      run: "respJson=$(curl --location --request GET 'https://slresultapi.uat.securin.io/resultapi/aws/ecr/token'\
+      run: "respJson=$(curl --location --request GET 'https://slresultapi.securin.io/resultapi/aws/ecr/token'\
         \  --header 'Authorization: Bearer ${{secrets.CLI_ACCESS_TOKEN}}'  --data-raw\
         \ ' ' ) \necho \"authTokenJson=$respJson\" >> $GITHUB_OUTPUT"
     - uses: actions/checkout@v3
