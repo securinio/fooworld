@@ -13,7 +13,7 @@ jobs:
     env:
       APP_ID: f8b1b81fd99e61185bf9e96f18b3a22e234f32dc8b745e7ca91046448cc6bcc0
       BRANCH_NAME: uat
-      SCAN_ID: 1b53fdd9d76747a3547bf7c6a82b9e1e48cde11a58e2e23361477bf708c828e2
+      SCAN_ID: 2ff4df452b4e5eb6a391503274392391c0e8008593351cff16c5996abacffe4f
       REQ_URL_MAP: "${{toJSON('{\"SL_RESULT_API_HOST\":\"http://844a-49-37-221-63.ngrok.io/resultapi\"\
         ,\"SL_RESULTPARSER_API_HOST\":\"http://ceac-49-37-221-63.ngrok.io/resultparserapi\"\
         }')}}"
