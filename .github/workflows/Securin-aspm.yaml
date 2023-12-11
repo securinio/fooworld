@@ -11,16 +11,16 @@ on:
 jobs:
   scanning:
     env:
-      APP_ID: c8c5139fa02c5948612bf93f3217d6b4b1f73ff4c49703ef765cccf51175f923
+      APP_ID: c7d724330d103b10a3d14ee3db77365a50f0f0c715f06a69dade56523c175be7
       BRANCH_NAME: main
-      SCAN_ID: 6367d31eba1f5d813a06be9075d1188256f9b29103c15b9d4ff9ca737c11a6d6
-      REQ_URL_MAP: "${{toJSON('{\"SL_RESULT_API_HOST\":\"https://slresultapi.securin.io/resultapi\"\
-        ,\"SL_RESULTPARSER_API_HOST\":\"https://slresultparserapi.securin.io/resultparserapi\"\
+      SCAN_ID: 1c92beef5c00d207994192d74b3509006c51b60ce5ed970f0ce24be633df9a6b
+      REQ_URL_MAP: "${{toJSON('{\"SL_RESULT_API_HOST\":\"https://slresultapi.qa.securin.io/resultapi\"\
+        ,\"SL_RESULTPARSER_API_HOST\":\"https://slresultparserapi.qa.securin.io/resultparserapi\"\
         }')}}"
     steps:
     - name: Retrieve Token Info
       id: auth_token
-      run: "respJson=$(curl --location --request GET 'https://slresultapi.securin.io/resultapi/aws/ecr/token'\
+      run: "respJson=$(curl --location --request GET 'https://slresultapi.qa.securin.io/resultapi/aws/ecr/token'\
         \  --header 'X-ASPM-Auth-Key: ${{secrets.ORG_API_KEY}}'  --data-raw ' ' )\
         \ \necho \"authTokenJson=$respJson\" >> $GITHUB_OUTPUT"
     - uses: actions/checkout@v3
@@ -37,10 +37,10 @@ jobs:
         \ ) \ndocker login --username  $usrVal --password $usrPassword $usrPrxyUrl\
         \ \ndocker pull -q $usrImgTag \ndocker run -v ${{github.workspace}}:/src \
         \ --volume ${{github.workspace}}:/workdir -v /var/run/docker.sock:/var/run/docker.sock\
-        \ $usrImgTag -org_api_key ${{secrets.ORG_API_KEY}} -app_id ${{ env.APP_ID\
-        \ }} -scan_id ${{ env.SCAN_ID }} -branch_name ${{ env.BRANCH_NAME }} -req_url_map\
-        \ ${{ env.REQ_URL_MAP }} -tool_name github event:${{ github.event_name }}\
-        \  pr_number:${{ github.event.number }} -upload_log true"
+        \ $usrImgTag -api_key ${{secrets.ORG_API_KEY}} -wrkspc_id ${{secrets.WORKSPACE_ID}}\
+        \ -app_id ${{ env.APP_ID }} -scan_id ${{ env.SCAN_ID }} -branch_name ${{ env.BRANCH_NAME\
+        \ }} -req_url_map ${{ env.REQ_URL_MAP }} -tool_name github event:${{ github.event_name\
+        \ }}  pr_number:${{ github.event.number }} -upload_log true"
     - name: Upload SARIF file
       uses: github/codeql-action/upload-sarif@v2
       with:
