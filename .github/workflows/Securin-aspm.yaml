@@ -13,7 +13,7 @@ jobs:
     env:
       APP_ID: 2f9231ad44190b4a2cad05353771b0d1590bd4cb6fd23a69d10935144daabe00
       BRANCH_NAME: Dev
-      SCAN_ID: 0220bd8150920863339547399efba39cac555ad70c73c5c8dd775a0fd3bd885a
+      SCAN_ID: 87ecc20fb77c8135cf48084c113181a31c7a8c6c648535af5e4020c9935c819e
       REQ_URL_MAP: "${{toJSON('{\"SL_RESULT_API_HOST\":\"https://slresultapi.uat.securin.io/resultapi\"\
         ,\"SL_RESULTPARSER_API_HOST\":\"https://slresultparserapi.uat.securin.io/resultparserapi\"\
         }')}}"
@@ -41,14 +41,7 @@ jobs:
         \ -app_id ${{ env.APP_ID }} -scan_id ${{ env.SCAN_ID }} -branch_name ${{ env.BRANCH_NAME\
         \ }} -req_url_map ${{ env.REQ_URL_MAP }} -tool_name github event:${{ github.event_name\
         \ }}  pr_number:${{ github.event.number }} -upload_log true"
-    - name: Upload SARIF file
-      uses: github/codeql-action/upload-sarif@v2
-      with:
-        sarif_file: "${{github.workspace}}/results/result.sarif"
-      if: hashFiles('**/result.sarif') !=''
     - name: Evaluate build status
       run: "cat ${{github.workspace}}/results/status.txt\nexit 1\n"
       if: hashFiles('**/status.txt') !=''
-    permissions:
-      security-events: write
     runs-on: ubuntu-latest
